@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.64.2",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@types/react-query": "^1.2.8",
