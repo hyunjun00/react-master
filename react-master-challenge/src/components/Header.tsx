@@ -15,6 +15,9 @@ function Header() {
             {isDark ? "light" : "dark"} Mode
           </button>
         </li>
+        <li>
+          <Link to={"/"}>&larr; Home</Link>
+        </li>
       </ul>
     </header>
   );
