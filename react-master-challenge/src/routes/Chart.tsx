@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { fetchCoinHistory } from "../api.ts";
 import ApexCharts from "react-apexcharts";
-// import { isDarkAtom } from "./atoms.ts";
+import { isDarkAtom } from "./atoms.ts";
 import { useRecoilValue } from "recoil";
 import { useOutletContext } from "react-router-dom";
 
@@ -31,7 +31,7 @@ function Chart() {
     }
   );
 
-  // const isDark = useRecoilValue(isDarkAtom);
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <div>
       {isLoading ? (
@@ -47,7 +47,7 @@ function Chart() {
           ]}
           options={{
             theme: {
-              mode: false ? "dark" : "light",
+              mode: isDark ? "dark" : "light",
             },
             chart: {
               height: 300,

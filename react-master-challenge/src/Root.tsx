@@ -1,15 +1,16 @@
 import React from "react";
-import Router from "./Router.tsx";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { darkTheme, lightTheme } from "./theme.ts";
 import { useRecoilValue } from "recoil";
-// import { isDarkAtom } from "./routes/atoms.ts";
+import { isDarkAtom } from "./routes/atoms.ts";
 import { Outlet } from "react-router-dom";
+import Header from "./components/Header.tsx";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
-html, body, div, span, applet, object, iframe,
+himport Header from './components/Header';
+tml, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -73,12 +74,12 @@ a {
 `;
 
 function Root() {
-  // const isDark = useRecoilValue(isDarkAtom);
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
-      {/* <ThemeProvider theme={isDark ? darkTheme : lightTheme}> */}
-      <ThemeProvider theme={false ? darkTheme : lightTheme}>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
+        <Header />
         <Outlet />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>

@@ -3,15 +3,11 @@ import { Helmet } from "react-helmet";
 import {
   Link,
   Outlet,
-  Route,
-  Routes,
   useLocation,
   useMatch,
   useParams,
 } from "react-router-dom";
 import styled from "styled-components";
-import Price from "./Price.tsx";
-import Chart from "./Chart.tsx";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTickers } from "../api.ts";
 
