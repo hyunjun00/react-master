@@ -1,7 +1,7 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Outlet } from "react-router-dom";
-import ToDoList from "./component/ToDoList.tsx";
+import ToDoList from "./components/ToDoList.tsx";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
