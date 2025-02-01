@@ -1,7 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Outlet } from "react-router-dom";
-import ToDoList from "./components/ToDoList.tsx";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -56,11 +55,11 @@ table {
   box-sizing:border-box;
 }
 body {
-  font-weight:300;
-  font-family:'Source Sans Pro', sans-serif;
-  background-color:${(props) => props.theme.bgColor};
-  color:${(props) => props.theme.textColor};
-  line-height:1.2;
+  font-weight: 300;
+  font-family: 'Source Sans Pro', sans-serif;
+  color:black;
+  line-height: 1.2;
+  background:linear-gradient(135deg,#e09,#d0e);
 }
 a {
   text-decoration:none;
@@ -72,8 +71,7 @@ function Root() {
   return (
     <>
       <GlobalStyle />
-      {/* <Outlet /> */}
-      <ToDoList />
+      <Outlet />
     </>
   );
 }
