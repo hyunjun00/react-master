@@ -134,6 +134,16 @@ const BigOverview = styled.p`
   color: ${(props) => props.theme.white.lighter};
 `;
 
+const BigEtc = styled.div`
+  padding: 20px;
+  top: -80px;
+  position: relative;
+  color: ${(props) => props.theme.white.lighter};
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
 const RowTitle = styled.h2`
   color: ${(props) => props.theme.white.lighter};
   font-size: 46px;
@@ -203,11 +213,6 @@ function Home() {
   const history = useNavigate();
   const bigMovieMatch: PathMatch<string> | null = useMatch("movies/:movieId");
   const { scrollY } = useScroll();
-  // const { data: nowPlayingData, isLoading: nowPlayingLoading } =
-  //   useQuery<IGetMoviesResult>({
-  //     queryKey: ["movies", "nowPlaying"],
-  //     queryFn: getNowPlayingMovies,
-  //   });
   const useMultipleQuery = () => {
     const nowPlaying = useQuery<IGetMoviesResult>({
       queryKey: ["movies", "nowPlaying"],
@@ -504,6 +509,14 @@ function Home() {
                       />
                       <BigTitle>{clickedMovie.title}</BigTitle>
                       <BigOverview>{clickedMovie.overview}</BigOverview>
+                      <BigEtc>
+                        <div>Popular: {clickedMovie.popularity}</div>
+                        <div>Release Date: {clickedMovie.release_date}</div>
+                        <div>
+                          ⭐️{clickedMovie.vote_average} / 🗳️
+                          {clickedMovie.vote_count}
+                        </div>
+                      </BigEtc>
                     </>
                   )}
                 </BigMovie>
