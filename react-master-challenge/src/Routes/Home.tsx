@@ -43,12 +43,14 @@ const Overview = styled.p`
 const Slider = styled.div`
   position: relative;
   top: -100px;
+  /* display: grid;
+  grid-template-columns: 1fr 6fr 1fr; */
 `;
 
 const Row = styled(motion.div)`
   display: grid;
   gap: 5px;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 0.3fr 1fr 1fr 1fr 1fr 1fr 1fr 0.3fr;
   position: absolute;
   width: 100%;
 `;
@@ -125,16 +127,41 @@ const BigOverview = styled.p`
   color: ${(props) => props.theme.white.lighter};
 `;
 
+const RowTitle = styled.h2`
+  color: ${(props) => props.theme.white.lighter};
+  font-size: 46px;
+`;
+
+const NextBox = styled.p`
+  background-color: transparent;
+  height: 200px;
+  font-size: 60px;
+  width: 10%;
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+`;
+
+const PrevBox = styled.div`
+  background-color: transparent;
+  height: 200px;
+  font-size: 60px;
+  width: 10%;
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+`;
+
 const rowVariants = {
-  hidden: {
-    x: window.outerWidth + 5,
-  },
+  hidden: (isBack: boolean) => ({
+    x: isBack ? -window.outerWidth - 5 : window.outerWidth + 5,
+  }),
   visible: {
     x: 0,
   },
-  exit: {
-    x: -window.outerWidth - 5,
-  },
+  exit: (isBack: boolean) => ({
+    x: isBack ? window.outerWidth + 5 : -window.outerWidth - 5,
+  }),
 };
 
 const boxVarinats = {
@@ -175,13 +202,25 @@ function Home() {
   });
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
+  const [back, setBack] = useState(false);
   const increaseIndex = () => {
     if (data) {
       if (leaving) return;
+      setBack(false);
       toggleLeaving();
       const totalMovies = data?.results.length - 1;
       const maxIndex = Math.floor(totalMovies / offset) - 1;
       setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+    }
+  };
+  const decreaseIndex = () => {
+    if (data) {
+      if (leaving) return;
+      setBack(true);
+      toggleLeaving();
+      const totalMovies = data?.results.length - 1;
+      const maxIndex = Math.floor(totalMovies / offset) - 1;
+      setIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
     }
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
@@ -199,15 +238,20 @@ function Home() {
       ) : (
         <>
           <Banner
-            onClick={increaseIndex}
             $bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}
           >
             <Title>{data?.results[0].title}</Title>
             <Overview>{data?.results[0].overview}</Overview>
           </Banner>
           <Slider>
-            <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+            <AnimatePresence
+              custom={back}
+              initial={false}
+              onExitComplete={toggleLeaving}
+            >
+              <RowTitle>Now Playing...</RowTitle>
               <Row
+                custom={back}
                 variants={rowVariants}
                 initial="hidden"
                 animate="visible"
@@ -215,6 +259,7 @@ function Home() {
                 transition={{ type: "tween", duration: 1 }}
                 key={index}
               >
+                <PrevBox onClick={decreaseIndex}>˱</PrevBox>
                 {data?.results
                   .slice(1)
                   .slice(offset * index, offset * index + offset)
@@ -234,9 +279,11 @@ function Home() {
                       </Info>
                     </Box>
                   ))}
+                <NextBox onClick={increaseIndex}>˲</NextBox>
               </Row>
             </AnimatePresence>
           </Slider>
+          {/* movie Box click Page */}
           <AnimatePresence>
             {bigMovieMatch ? (
               <>
