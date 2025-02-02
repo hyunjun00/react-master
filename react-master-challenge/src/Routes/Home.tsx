@@ -218,7 +218,7 @@ function Home() {
       queryKey: ["movies", "nowPlaying"],
       queryFn: getNowPlayingMovies,
     });
-    const latest = useQuery<IGetMoviesResult>({
+    const popular = useQuery<IGetMoviesResult>({
       queryKey: ["movies", "popular"],
       queryFn: getPopularMovies,
     });
@@ -230,7 +230,7 @@ function Home() {
       queryKey: ["movies", "upComing"],
       queryFn: getUpcomingMovies,
     });
-    return [nowPlaying, latest, topRated, upComing];
+    return [nowPlaying, popular, topRated, upComing];
   };
   const [
     { isLoading: nowPlayingLoading, data: nowPlayingData },
@@ -290,6 +290,7 @@ function Home() {
     nowPlayingData?.results.find(
       (movie) => movie.id === +bigMovieMatch.params.movieId!
     );
+  console.log(clickedMovie);
   return (
     <Wrapper>
       {nowPlayingLoading &&

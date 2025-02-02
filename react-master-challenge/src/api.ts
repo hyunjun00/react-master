@@ -24,6 +24,29 @@ export interface IGetMoviesResult {
   total_results: number;
 }
 
+interface ITv {
+  id: number;
+  backdrop_path: string;
+  poster_path: string;
+  name: string;
+  overview: string;
+  popularity: number;
+  first_air_date: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+export interface IGetTvsResult {
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
+  page: number;
+  results: ITv[];
+  total_pages: number;
+  total_results: number;
+}
+
 export function getNowPlayingMovies() {
   return fetch(`${BASE_PATH}/movie/now_playing?api_key=${API_KEY}`).then(
     (response) => response.json()
@@ -44,6 +67,30 @@ export function getTopRatedMovies() {
 
 export function getUpcomingMovies() {
   return fetch(`${BASE_PATH}/movie/upcoming?api_key=${API_KEY}`).then(
+    (response) => response.json()
+  );
+}
+
+export function getAiringTodayTvs() {
+  return fetch(`${BASE_PATH}/tv/airing_today?api_key=${API_KEY}`).then(
+    (response) => response.json()
+  );
+}
+
+export function getOnTheAirTvs() {
+  return fetch(`${BASE_PATH}/tv/on_the_air?api_key=${API_KEY}`).then(
+    (response) => response.json()
+  );
+}
+
+export function getPopularTvs() {
+  return fetch(`${BASE_PATH}/tv/popular?api_key=${API_KEY}`).then((response) =>
+    response.json()
+  );
+}
+
+export function getTopRatedTvs() {
+  return fetch(`${BASE_PATH}/tv/top_rated?api_key=${API_KEY}`).then(
     (response) => response.json()
   );
 }
