@@ -9,6 +9,7 @@ import { PathMatch, useMatch, useNavigate } from "react-router-dom";
 const Wrapper = styled.div`
   background-color: black;
   padding-bottom: 200px;
+  overflow-x: hidden;
 `;
 
 const Loader = styled.div`
@@ -97,6 +98,31 @@ const BigMovie = styled(motion.div)`
   right: 0;
   left: 0;
   margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: ${(props) => props.theme.black.lighter};
+`;
+
+const BigCover = styled.div`
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  height: 400px;
+`;
+
+const BigTitle = styled.h3`
+  color: ${(props) => props.theme.white.lighter};
+  padding: 20px;
+  font-size: 46px;
+  position: relative;
+  top: -80px;
+`;
+
+const BigOverview = styled.p`
+  padding: 20px;
+  top: -80px;
+  position: relative;
+  color: ${(props) => props.theme.white.lighter};
 `;
 
 const rowVariants = {
@@ -141,7 +167,7 @@ const infoVariants = {
 
 function Home() {
   const history = useNavigate();
-  const bigMovieMatch: PathMatch<string> | null = useMatch("/movies/:id");
+  const bigMovieMatch: PathMatch<string> | null = useMatch("movies/:movieId");
   const { scrollY } = useScroll();
   const { data, isLoading } = useQuery<IGetMoviesResult>({
     queryKey: ["movies", "nowPlaying"],
@@ -163,6 +189,9 @@ function Home() {
     history(`movies/${movieId}`);
   };
   const onOverlayClick = () => history("");
+  const clickedMovie =
+    bigMovieMatch?.params.movieId &&
+    data?.results.find((movie) => movie.id === +bigMovieMatch.params.movieId!);
   return (
     <Wrapper>
       {isLoading ? (
@@ -220,7 +249,20 @@ function Home() {
                   style={{ top: scrollY.get() + 100 }}
                   layoutId={bigMovieMatch.params.movieId}
                 >
-                  hello
+                  {clickedMovie && (
+                    <>
+                      <BigCover
+                        style={{
+                          backgroundImage: `url(${makeImagePath(
+                            clickedMovie.backdrop_path,
+                            "w500"
+                          )})`,
+                        }}
+                      />
+                      <BigTitle>{clickedMovie.title}</BigTitle>
+                      <BigOverview>{clickedMovie.overview}</BigOverview>
+                    </>
+                  )}
                 </BigMovie>
               </>
             ) : null}
