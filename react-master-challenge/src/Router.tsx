@@ -1,7 +1,9 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root.tsx";
-import App from "./App.tsx";
+import Home from "./Routes/Home.tsx";
+import Tv from "./Routes/tv.tsx";
+import Search from "./Routes/Search.tsx";
 
 const router = createBrowserRouter([
   {
@@ -10,7 +12,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <App />,
+        element: <Home />,
+      },
+      {
+        path: "tv",
+        element: <Tv />,
+      },
+      {
+        path: "search",
+        element: <Search />,
       },
     ],
   },
