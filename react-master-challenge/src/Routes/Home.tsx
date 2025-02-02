@@ -50,8 +50,6 @@ const Slider = styled.div`
   position: relative;
   top: -100px;
   margin-bottom: 300px;
-  /* display: grid;
-  grid-template-columns: 1fr 6fr 1fr; */
 `;
 
 const Row = styled(motion.div)`

@@ -94,3 +94,15 @@ export function getTopRatedTvs() {
     (response) => response.json()
   );
 }
+
+export function searchMovies(keyword: string) {
+  return fetch(
+    `${BASE_PATH}/search/movie?api_key=${API_KEY}&query=${keyword}`
+  ).then((response) => response.json());
+}
+
+export function searchTvs(keyword: string) {
+  return fetch(
+    `${BASE_PATH}/search/tv?api_key=${API_KEY}&query=${keyword}`
+  ).then((response) => response.json());
+}

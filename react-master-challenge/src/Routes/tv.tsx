@@ -327,19 +327,19 @@ function Tv() {
                 {airingTodayData?.results
                   .slice(1)
                   .slice(offset * airIdx, offset * airIdx + offset)
-                  .map((movie) => (
+                  .map((tv) => (
                     <Box
-                      layoutId={movie.id + ""}
+                      layoutId={tv.id + ""}
                       whileHover="hover"
                       initial="normal"
-                      key={movie.id}
+                      key={tv.id}
                       variants={boxVarinats}
-                      onClick={() => onBoxClicked(movie.id)}
+                      onClick={() => onBoxClicked(tv.id)}
                       transition={{ type: "tween" }}
-                      $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                      $bgPhoto={makeImagePath(tv.backdrop_path, "w500")}
                     >
                       <Info variants={infoVariants}>
-                        <h4>{movie.name}</h4>
+                        <h4>{tv.name}</h4>
                       </Info>
                     </Box>
                   ))}
@@ -373,19 +373,19 @@ function Tv() {
                 {onTheAirData?.results
                   .slice(1)
                   .slice(offset * onTheAirIdx, offset * onTheAirIdx + offset)
-                  .map((movie) => (
+                  .map((tv) => (
                     <Box
-                      layoutId={movie.id + ""}
+                      layoutId={tv.id + ""}
                       whileHover="hover"
                       initial="normal"
-                      key={movie.id}
+                      key={tv.id}
                       variants={boxVarinats}
-                      onClick={() => onBoxClicked(movie.id)}
+                      onClick={() => onBoxClicked(tv.id)}
                       transition={{ type: "tween" }}
-                      $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                      $bgPhoto={makeImagePath(tv.backdrop_path, "w500")}
                     >
                       <Info variants={infoVariants}>
-                        <h4>{movie.name}</h4>
+                        <h4>{tv.name}</h4>
                       </Info>
                     </Box>
                   ))}
@@ -419,19 +419,19 @@ function Tv() {
                 {topRatedData?.results
                   .slice(1)
                   .slice(offset * topIdx, offset * topIdx + offset)
-                  .map((movie) => (
+                  .map((tv) => (
                     <Box
-                      layoutId={movie.id + ""}
+                      layoutId={tv.id + ""}
                       whileHover="hover"
                       initial="normal"
-                      key={movie.id}
+                      key={tv.id}
                       variants={boxVarinats}
-                      onClick={() => onBoxClicked(movie.id)}
+                      onClick={() => onBoxClicked(tv.id)}
                       transition={{ type: "tween" }}
-                      $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                      $bgPhoto={makeImagePath(tv.backdrop_path, "w500")}
                     >
                       <Info variants={infoVariants}>
-                        <h4>{movie.name}</h4>
+                        <h4>{tv.name}</h4>
                       </Info>
                     </Box>
                   ))}
@@ -463,19 +463,19 @@ function Tv() {
                 {popularData?.results
                   .slice(1)
                   .slice(offset * popularIdx, offset * popularIdx + offset)
-                  .map((movie) => (
+                  .map((tv) => (
                     <Box
-                      layoutId={movie.id + ""}
+                      layoutId={tv.id + ""}
                       whileHover="hover"
                       initial="normal"
-                      key={movie.id}
+                      key={tv.id}
                       variants={boxVarinats}
-                      onClick={() => onBoxClicked(movie.id)}
+                      onClick={() => onBoxClicked(tv.id)}
                       transition={{ type: "tween" }}
-                      $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                      $bgPhoto={makeImagePath(tv.backdrop_path, "w500")}
                     >
                       <Info variants={infoVariants}>
-                        <h4>{movie.name}</h4>
+                        <h4>{tv.name}</h4>
                       </Info>
                     </Box>
                   ))}
@@ -486,7 +486,7 @@ function Tv() {
             </AnimatePresence>
           </Slider>
 
-          {/* movie Box click Page */}
+          {/* tv Box click Page */}
           <AnimatePresence>
             {bigTvMatch ? (
               <>
